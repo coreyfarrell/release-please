@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import detectIndent from 'detect-indent';
 import {checkpoint, CheckpointType} from '../util/checkpoint';
 import {Update, UpdateOptions, VersionsMap} from './update';
 import {GitHubFileContents} from '../github';
@@ -42,6 +43,6 @@ export class PackageJson implements Update {
       CheckpointType.Success
     );
     parsed.version = this.version;
-    return JSON.stringify(parsed, null, 2) + '\n';
+    return JSON.stringify(parsed, null, detectIndent(content).indent) + '\n';
   }
 }
